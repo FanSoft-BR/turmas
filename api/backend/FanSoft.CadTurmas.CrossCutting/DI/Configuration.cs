@@ -4,7 +4,7 @@ namespace FanSoft.CadTurmas.CrossCutting.DI
 {
     public static class Configuration
     {
-         public static void RegisterServices(this IServiceCollection services)
+        public static void RegisterServices(this IServiceCollection services)
         {
             registerMediatr(services);
             registerData(services);
@@ -28,7 +28,7 @@ namespace FanSoft.CadTurmas.CrossCutting.DI
 
         private static void registerData(IServiceCollection services)
         {
-            // services.AddScoped<Data.EF.AgendaMedicaDataContext>();
+            services.AddScoped<Data.EF.CadTurmasDataContext>();
             // services.AddTransient<Domain.Contracts.Infra.Data.IUnitOfWork, Data.EF.UnitOfWorkEF>();
 
             // services.AddScoped<Data.Dapper.AgendaMedicaDataContext>();

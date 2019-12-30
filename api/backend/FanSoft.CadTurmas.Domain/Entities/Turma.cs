@@ -4,6 +4,13 @@ namespace FanSoft.CadTurmas.Domain.Entities
 {
     public class Turma : Entity
     {
+        public Turma(Guid id, string nome, string descricao)
+        {
+            Id = id;
+            Nome = nome;
+            Descricao = descricao;
+        }
+
         protected Turma() {}
 
         public Guid Id { get; private set; }
