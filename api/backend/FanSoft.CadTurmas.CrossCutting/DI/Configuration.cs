@@ -29,18 +29,10 @@ namespace FanSoft.CadTurmas.CrossCutting.DI
         private static void registerData(IServiceCollection services)
         {
             services.AddScoped<Data.EF.CadTurmasDataContext>();
-            // services.AddTransient<Domain.Contracts.Infra.Data.IUnitOfWork, Data.EF.UnitOfWorkEF>();
+            services.AddTransient<Domain.Contracts.Infra.Data.IUnitOfWork, Data.EF.UnitOfWorkEF>();
 
-            // services.AddScoped<Data.Dapper.AgendaMedicaDataContext>();
-            // services.AddTransient<Domain.Contracts.Repositories.IPacienteReadRepository,
-            //     Data.Dapper.Repositories.PacienteReadRepositoryDapper>();
-
-            //services.AddScoped<Data.ADO.AgendaMedicaDataContext>();
-            //services.AddTransient<Domain.Contracts.Repositories.IPacienteReadRepository, 
-            //    Data.ADO.Repositories.PacienteReadRepositoryADO>();
-
-            //services.AddTransient<Domain.Contracts.Repositories.IPacienteReadRepository, Data.EF.Repositories.PacienteReadRepositoryEF>();
-            //services.AddTransient<Domain.Contracts.Repositories.IPacienteWriteRepository, Data.EF.Repositories.PacienteWriteRepositoryEF>();
+            services.AddTransient<Domain.Contracts.Repositories.ITurmaReadRepository, Data.EF.Repositories.TurmaReadRepositoryEF>();
+            services.AddTransient<Domain.Contracts.Repositories.ITurmaWriteRepository, Data.EF.Repositories.TurmaWriteRepositoryEF>();
         }
 
         private static void registerAppServices(IServiceCollection services)
