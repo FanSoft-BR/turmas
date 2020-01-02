@@ -12,6 +12,7 @@ namespace FanSoft.CadTurmas.Api
         {
             services.AddControllers();
             services.RegisterServices();
+            services.AddSwagger();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -19,11 +20,15 @@ namespace FanSoft.CadTurmas.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }else {
+            }
+            else
+            {
                 app.UseHttpsRedirection();
             }
 
             app.UseRouting();
+
+            app.UseCustomSwagger();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FanSoft.CadTurmas.CrossCutting.DI
@@ -14,16 +15,16 @@ namespace FanSoft.CadTurmas.CrossCutting.DI
 
         private static void registerMediatr(IServiceCollection services)
         {
-            // const string applicationAssemblyName = "FanSoft.AM.Domain";
-            // var assembly = AppDomain.CurrentDomain.Load(applicationAssemblyName);
+            const string applicationAssemblyName = "FanSoft.CadTurmas.Domain";
+            var assembly = System.AppDomain.CurrentDomain.Load(applicationAssemblyName);
 
-            // AssemblyScanner
-            //     .FindValidatorsInAssembly(assembly)
-            //     .ForEach(result => services.AddScoped(result.InterfaceType, result.ValidatorType));
+            FluentValidation.AssemblyScanner
+                .FindValidatorsInAssembly(assembly)
+                .ForEach(result => services.AddScoped(result.InterfaceType, result.ValidatorType));
 
-            // services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailFastRequestBehavior<,>));
+            services.AddScoped(typeof(MediatR.IPipelineBehavior<,>), typeof(Domain.Mediator.FailFastRequestBehavior<,>));
 
-            // services.AddMediatR();
+            services.AddMediatR(assembly);
         }
 
         private static void registerData(IServiceCollection services)
