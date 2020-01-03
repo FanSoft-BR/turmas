@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using FanSoft.CadTurmas.Domain.Contracts.Repositories;
@@ -10,43 +9,43 @@ namespace FanSoft.CadTurmas.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
-    public class TurmasController : ControllerBase
+    public class InstrutoresController : ControllerBase
     {
-        private readonly ITurmaReadRepository _turmaReadRepository;
+        private readonly IInstrutorReadRepository _instrutorReadRepository;
         private readonly IMediator _mediator;
 
-        public TurmasController(ITurmaReadRepository turmaReadRepository, IMediator mediator)
+        public InstrutoresController(IInstrutorReadRepository instrutorReadRepository, IMediator mediator)
         {
-            _turmaReadRepository = turmaReadRepository;
+            _instrutorReadRepository = instrutorReadRepository;
             _mediator = mediator;
         }
 
         /// <summary>
-        /// Lista todas as turmas.
+        /// Lista todos os instrutores.
         /// </summary>
-        /// <returns>Uma lista de turmas</returns>
-        /// <response code="200">Turmas retornardas com sucesso</response>
+        /// <returns>Uma lista de instrutores</returns>
+        /// <response code="200">Instrutores retornardos com sucesso</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var turmas = await _turmaReadRepository.GetAsync();
-            return Ok(turmas);
+            var data = await _instrutorReadRepository.GetAsync();
+            return Ok(data);
         }
 
         /// <summary>
-        /// Busca uma turma pelo ID.
+        /// Busca um instrutor pelo ID.
         /// </summary>
-        /// <param name="id">Id da Turma</param> 
-        /// <returns>Uma turma</returns>
-        /// <response code="200">Turma retornarda com sucesso</response>
-        /// <response code="404">Caso a turma não exista ou o id não seja um GUID</response>
+        /// <param name="id">Id do Instrutor</param> 
+        /// <returns>Um instrutor</returns>
+        /// <response code="200">Instrutor retornardo com sucesso</response>
+        /// <response code="404">Caso o instrutor não exista ou o id não seja um GUID</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("{id:guid}", Name = "GetTurmaById")]
-        public async Task<IActionResult> GetById(Guid id)
+        [HttpGet("{id:int}", Name = "GetInstrutorById")]
+        public async Task<IActionResult> GetById(int id)
         {
-            var data = await _turmaReadRepository.GetAsync(id);
+            var data = await _instrutorReadRepository.GetAsync(id);
 
             if (data == null)
                 return NotFound();
@@ -55,26 +54,26 @@ namespace FanSoft.CadTurmas.Api.Controllers
         }
 
         /// <summary>
-        /// Adiciona uma nova turma.
+        /// Adiciona um novo instrutor.
         /// </summary>
         /// <remarks>
         /// Exemplo de requisição:
         ///
-        ///     POST /Turmas
+        ///     POST /Instrutores
         ///     {
-        ///        "nome": "Turma XPTO",
-        ///        "descricao": "Descrição da turma XPTO"
+        ///        "nome": "Instrutor XPTO",
+        ///        "descricao": "Descrição do instrutor XPTO"
         ///     }
         ///
         /// </remarks>
         /// <param name="request"></param>
-        /// <returns>Uma nova turma</returns>
-        /// <response code="201">Returna a nova turma</response>
+        /// <returns>Um novo instrutor</returns>
+        /// <response code="201">Returna o novo instrutor</response>
         /// <response code="400">Caso o nome seja nulo</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Domain.Mediator.Turma.Add.Request request)
+        public async Task<IActionResult> Post([FromBody]Domain.Mediator.Instrutor.Add.Request request)
         {
             var response = await _mediator.Send(request).ConfigureAwait(false);
 
@@ -83,20 +82,20 @@ namespace FanSoft.CadTurmas.Api.Controllers
                 return BadRequest(response.Errors);
             }
 
-            return CreatedAtRoute("GetTurmaById", new { id = response.Result.Id }, response.Result);
+            return CreatedAtRoute("GetInstrutorById", new { id = response.Result.Id }, response.Result);
         }
 
         /// <summary>
-        /// Edita uma turma.
+        /// Edita um instrutor.
         /// </summary>
-        /// <param name="id">Id da Turma</param> 
+        /// <param name="id">Id do Instrutor</param> 
         /// <remarks>
         /// Exemplo de requisição:
         ///
-        ///     PUT /Turmas/{id}
+        ///     PUT /Instrutor/{id}
         ///     {
-        ///        "nome": "Turma XPTO",
-        ///        "descricao": "Descrição da turma XPTO"
+        ///        "nome": "Instrutor XPTO",
+        ///        "descricao": "Descrição do instrutor XPTO"
         ///     }
         ///
         /// </remarks>
@@ -105,8 +104,8 @@ namespace FanSoft.CadTurmas.Api.Controllers
         /// <response code="400">Caso o nome seja nulo</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody]Domain.Mediator.Turma.Edit.Request request)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Put(int id, [FromBody]Domain.Mediator.Instrutor.Edit.Request request)
         {
             request.Id = id;
 
@@ -121,17 +120,17 @@ namespace FanSoft.CadTurmas.Api.Controllers
         }
 
         /// <summary>
-        /// Exclui uma turma pelo ID.
+        /// Exclui um instrutor pelo ID.
         /// </summary>
-        /// <param name="id">Id da Turma</param> 
-        /// <response code="204">Turma excluída c/ sucesso</response>
-        /// <response code="400">Caso a turma não exista ou o id não seja um GUID</response>
+        /// <param name="id">Id do instrutor</param> 
+        /// <response code="204">Instrutor excluído c/ sucesso</response>
+        /// <response code="400">Caso o instrutor não exista ou o id não seja um inteiro</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpDelete("{id:guid}")]
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var request = new Domain.Mediator.Turma.Del.Request();
+            var request = new Domain.Mediator.Instrutor.Del.Request();
             request.Id = id;
 
             var response = await _mediator.Send(request).ConfigureAwait(false);
@@ -143,6 +142,5 @@ namespace FanSoft.CadTurmas.Api.Controllers
 
             return NoContent();
         }
-
     }
 }
