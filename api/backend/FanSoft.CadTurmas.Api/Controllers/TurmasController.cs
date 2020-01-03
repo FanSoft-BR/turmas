@@ -5,6 +5,7 @@ using FanSoft.CadTurmas.Domain.Contracts.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using FanSoft.CadTurmas.Api.Models;
 
 namespace FanSoft.CadTurmas.Api.Controllers
 {
@@ -30,8 +31,8 @@ namespace FanSoft.CadTurmas.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var turmas = await _turmaReadRepository.GetAsync();
-            return Ok(turmas);
+            var turmas = await _turmaReadRepository.GetAllWithInstrutorAsync();
+            return Ok(turmas.Select(t=>t.ToVM()).ToList());
         }
 
         /// <summary>
@@ -46,12 +47,12 @@ namespace FanSoft.CadTurmas.Api.Controllers
         [HttpGet("{id:guid}", Name = "GetTurmaById")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var data = await _turmaReadRepository.GetAsync(id);
+            var data = await _turmaReadRepository.GetByIdWithInstrutorAsync(id);
 
             if (data == null)
                 return NotFound();
 
-            return Ok(data);
+            return Ok(data.ToVM());
         }
 
         /// <summary>
@@ -62,8 +63,11 @@ namespace FanSoft.CadTurmas.Api.Controllers
         ///
         ///     POST /Turmas
         ///     {
-        ///        "nome": "Turma XPTO",
-        ///        "descricao": "Descrição da turma XPTO"
+        ///         "nome": "Nova Turma",
+        ///         "dataInicio": "2020-01-03",
+        ///         "dataTermino": "2020-01-15",
+        ///         "instrutorId": 1,
+        ///         "descricao": "Descrição da Turma nova"
         ///     }
         ///
         /// </remarks>

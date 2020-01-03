@@ -10,7 +10,13 @@ namespace FanSoft.CadTurmas.Api
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    // não serializa nulos
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                });
+
             services.RegisterServices();
             services.AddSwagger();
         }

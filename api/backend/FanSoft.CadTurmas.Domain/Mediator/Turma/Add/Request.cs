@@ -1,3 +1,4 @@
+using System;
 using MediatR;
 
 namespace FanSoft.CadTurmas.Domain.Mediator.Turma.Add
@@ -6,6 +7,9 @@ namespace FanSoft.CadTurmas.Domain.Mediator.Turma.Add
     {
         
         public string Nome { get; set; }
+        public DateTime DataInicio { get; set; }
+        public DateTime DataTermino { get; set; }
+        public int? InstrutorId { get; set; }
         public string Descricao { get; set; }
         
     }

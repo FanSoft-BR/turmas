@@ -10,8 +10,8 @@ namespace FanSoft.CadTurmas.Data.EF
         private readonly IConfiguration _config;
 
         public CadTurmasDataContext(IConfiguration config) => _config = config;
-        public CadTurmasDataContext(DbContextOptions options) : base(options){}
-        
+        public CadTurmasDataContext(DbContextOptions options) : base(options) { }
+
         public DbSet<Instrutor> Instrutores { get; set; }
         public DbSet<Turma> Turmas { get; set; }
         // public DbSet<TurmaInstrutor> TurmasInstrutores { get; set; }
@@ -28,13 +28,13 @@ namespace FanSoft.CadTurmas.Data.EF
             modelBuilder.ApplyConfiguration(new Maps.TurmaMap());
 
             modelBuilder.Entity<Instrutor>().HasData(
-                new Instrutor(1,"Fabiano Nalin")
+                new Instrutor(1, "Fabiano Nalin")
             );
 
             var turmaId = Guid.NewGuid();
 
             modelBuilder.Entity<Turma>().HasData(
-                new Turma(turmaId, "AZ 203 Dez 2019", "Turma AZ 203")
+                new Turma(turmaId, "AZ 203 Dez 2019", DateTime.UtcNow.Date, DateTime.UtcNow.Date.AddDays(14), 1, "Turma AZ 203")
             );
 
         }
