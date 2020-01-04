@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FanSoft.CadTurmas.Data.EF.Migrations
 {
     [DbContext(typeof(CadTurmasDataContext))]
-    [Migration("20200103180115_MigracaoInicial")]
-    partial class MigracaoInicial
+    [Migration("20200104143151_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,8 +49,8 @@ namespace FanSoft.CadTurmas.Data.EF.Migrations
                         new
                         {
                             Id = 1,
-                            AlteradoEm = new DateTime(2020, 1, 3, 18, 1, 15, 21, DateTimeKind.Utc).AddTicks(9175),
-                            CriadoEm = new DateTime(2020, 1, 3, 18, 1, 15, 21, DateTimeKind.Utc).AddTicks(9149),
+                            AlteradoEm = new DateTime(2020, 1, 4, 14, 31, 50, 793, DateTimeKind.Utc).AddTicks(4525),
+                            CriadoEm = new DateTime(2020, 1, 4, 14, 31, 50, 793, DateTimeKind.Utc).AddTicks(4496),
                             Nome = "Fabiano Nalin"
                         });
                 });
@@ -92,14 +92,55 @@ namespace FanSoft.CadTurmas.Data.EF.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("df9344ae-e6bb-42c5-99af-5f1543908b9c"),
-                            AlteradoEm = new DateTime(2020, 1, 3, 18, 1, 15, 24, DateTimeKind.Utc).AddTicks(1561),
-                            CriadoEm = new DateTime(2020, 1, 3, 18, 1, 15, 24, DateTimeKind.Utc).AddTicks(1550),
-                            DataInicio = new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc),
-                            DataTermino = new DateTime(2020, 1, 17, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Id = new Guid("54442804-bf96-4b64-b334-1a8ae4772326"),
+                            AlteradoEm = new DateTime(2020, 1, 4, 14, 31, 50, 795, DateTimeKind.Utc).AddTicks(7950),
+                            CriadoEm = new DateTime(2020, 1, 4, 14, 31, 50, 795, DateTimeKind.Utc).AddTicks(7937),
+                            DataInicio = new DateTime(2020, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DataTermino = new DateTime(2020, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc),
                             Descricao = "Turma AZ 203",
                             InstrutorId = 1,
                             Nome = "AZ 203 Dez 2019"
+                        });
+                });
+
+            modelBuilder.Entity("FanSoft.CadTurmas.Domain.Entities.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AlteradoEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CriadoEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("char(88)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AlteradoEm = new DateTime(2020, 1, 4, 14, 31, 50, 804, DateTimeKind.Utc).AddTicks(8882),
+                            CriadoEm = new DateTime(2020, 1, 4, 14, 31, 50, 804, DateTimeKind.Utc).AddTicks(8864),
+                            Email = "nalin@fansoft.com.br",
+                            Nome = "Fabiano Nalin",
+                            Senha = "a1n5uKDhhuf8oIt9RxEKX4dGV3ASZODELtipSBegRkM92SE+EaUhgxS0now1iRwko0nTDhfR3q7rV+Lz3btZMQ=="
                         });
                 });
 

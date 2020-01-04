@@ -92,7 +92,7 @@ namespace FanSoft.CadTurmas.Api.Controllers
         /// <remarks>
         /// Exemplo de requisição:
         ///
-        ///     PUT /Instrutor/{id}
+        ///     PUT /Instrutores/{id}
         ///     {
         ///        "nome": "Instrutor XPTO",
         ///        "descricao": "Descrição do instrutor XPTO"
