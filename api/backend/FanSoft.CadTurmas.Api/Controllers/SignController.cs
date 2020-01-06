@@ -85,7 +85,7 @@ namespace FanSoft.CadTurmas.Api.Controllers
             var siginCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
                     issuer: "fansoft.com.br",
-                    audience: "fansoft.com.br",
+                    audience: "http://localhost",
                     claims: claims,
                     expires: DateTime.UtcNow.AddMinutes(5),
                     notBefore: DateTime.UtcNow,

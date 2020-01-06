@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using FanSoft.CadTurmas.Api.Models;
 using FanSoft.CadTurmas.Domain.Contracts.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FanSoft.CadTurmas.Api.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
     public class UsuariosController:ControllerBase

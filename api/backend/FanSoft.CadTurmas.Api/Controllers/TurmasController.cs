@@ -6,9 +6,11 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FanSoft.CadTurmas.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FanSoft.CadTurmas.Api.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
     public class TurmasController : ControllerBase
