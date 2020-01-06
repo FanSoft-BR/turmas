@@ -44,7 +44,7 @@ namespace FanSoft.CadTurmas.Data.EF.Repositories
        where TEntity : Entity
     {
         private readonly CadTurmasDataContext _ctx;
-        private readonly DbSet<TEntity> _db;
+        protected readonly DbSet<TEntity> _db;
         public WriteRepositoryEF(CadTurmasDataContext ctx)
         {
             _ctx = ctx;

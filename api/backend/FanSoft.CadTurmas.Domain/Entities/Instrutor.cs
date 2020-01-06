@@ -28,6 +28,7 @@ namespace FanSoft.CadTurmas.Domain.Entities
         {
             Nome = nome;
             Descricao = descricao;
+            AlteradoEm = DateTime.UtcNow;
         }
     }
 }

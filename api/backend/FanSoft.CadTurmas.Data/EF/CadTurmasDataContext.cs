@@ -1,6 +1,6 @@
 using System;
 using FanSoft.CadTurmas.Domain.Entities;
-using FanSoft.CadTurmas.Domain.Helpers;
+using FanSoft.CadTurmas.Domain.Infra.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

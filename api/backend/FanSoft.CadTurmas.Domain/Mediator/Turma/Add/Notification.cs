@@ -7,7 +7,7 @@ namespace FanSoft.CadTurmas.Domain.Mediator.Turma.Add
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
-        public DateTime DataHora { get; set; } = DateTime.Now;
+        public DateTime DataHora { get; set; } = DateTime.UtcNow;
 
         public override string ToString()
             => $"Turma {Nome} inserida com sucesso em {DataHora}";

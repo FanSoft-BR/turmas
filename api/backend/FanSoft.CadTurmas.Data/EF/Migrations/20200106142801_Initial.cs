@@ -33,7 +33,9 @@ namespace FanSoft.CadTurmas.Data.EF.Migrations
                     AlteradoEm = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Nome = table.Column<string>(type: "varchar(80)", nullable: false),
                     Email = table.Column<string>(type: "varchar(80)", nullable: false),
-                    Senha = table.Column<string>(type: "char(88)", nullable: false)
+                    Senha = table.Column<string>(type: "char(88)", nullable: false),
+                    RefreshToken = table.Column<string>(type: "char(32)", nullable: true),
+                    RefreshTokenValidate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,17 +69,17 @@ namespace FanSoft.CadTurmas.Data.EF.Migrations
             migrationBuilder.InsertData(
                 table: "Instrutor",
                 columns: new[] { "Id", "AlteradoEm", "CriadoEm", "Descricao", "Nome" },
-                values: new object[] { 1, new DateTime(2020, 1, 4, 14, 31, 50, 793, DateTimeKind.Utc).AddTicks(4525), new DateTime(2020, 1, 4, 14, 31, 50, 793, DateTimeKind.Utc).AddTicks(4496), null, "Fabiano Nalin" });
+                values: new object[] { 1, new DateTime(2020, 1, 6, 14, 28, 0, 349, DateTimeKind.Utc).AddTicks(9866), new DateTime(2020, 1, 6, 14, 28, 0, 349, DateTimeKind.Utc).AddTicks(9837), null, "Fabiano Nalin" });
 
             migrationBuilder.InsertData(
                 table: "Usuario",
-                columns: new[] { "Id", "AlteradoEm", "CriadoEm", "Email", "Nome", "Senha" },
-                values: new object[] { 1, new DateTime(2020, 1, 4, 14, 31, 50, 804, DateTimeKind.Utc).AddTicks(8882), new DateTime(2020, 1, 4, 14, 31, 50, 804, DateTimeKind.Utc).AddTicks(8864), "nalin@fansoft.com.br", "Fabiano Nalin", "a1n5uKDhhuf8oIt9RxEKX4dGV3ASZODELtipSBegRkM92SE+EaUhgxS0now1iRwko0nTDhfR3q7rV+Lz3btZMQ==" });
+                columns: new[] { "Id", "AlteradoEm", "CriadoEm", "Email", "Nome", "RefreshToken", "RefreshTokenValidate", "Senha" },
+                values: new object[] { 1, new DateTime(2020, 1, 6, 14, 28, 0, 362, DateTimeKind.Utc).AddTicks(6163), new DateTime(2020, 1, 6, 14, 28, 0, 362, DateTimeKind.Utc).AddTicks(6138), "nalin@fansoft.com.br", "Fabiano Nalin", null, null, "a1n5uKDhhuf8oIt9RxEKX4dGV3ASZODELtipSBegRkM92SE+EaUhgxS0now1iRwko0nTDhfR3q7rV+Lz3btZMQ==" });
 
             migrationBuilder.InsertData(
                 table: "Turma",
                 columns: new[] { "Id", "AlteradoEm", "CriadoEm", "DataInicio", "DataTermino", "Descricao", "InstrutorId", "Nome" },
-                values: new object[] { new Guid("54442804-bf96-4b64-b334-1a8ae4772326"), new DateTime(2020, 1, 4, 14, 31, 50, 795, DateTimeKind.Utc).AddTicks(7950), new DateTime(2020, 1, 4, 14, 31, 50, 795, DateTimeKind.Utc).AddTicks(7937), new DateTime(2020, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(2020, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc), "Turma AZ 203", 1, "AZ 203 Dez 2019" });
+                values: new object[] { new Guid("d4228a44-1a3d-46f1-b8eb-e2cfdb7ff551"), new DateTime(2020, 1, 6, 14, 28, 0, 352, DateTimeKind.Utc).AddTicks(5786), new DateTime(2020, 1, 6, 14, 28, 0, 352, DateTimeKind.Utc).AddTicks(5776), new DateTime(2020, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(2020, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc), "Turma AZ 203", 1, "AZ 203 Dez 2019" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Turma_InstrutorId",

@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace FanSoft.CadTurmas.Domain.Helpers
+namespace FanSoft.CadTurmas.Domain.Infra.Helpers
 {
     public static class StringHelpers
     {

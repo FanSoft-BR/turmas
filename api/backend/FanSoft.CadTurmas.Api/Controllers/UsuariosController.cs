@@ -13,7 +13,7 @@ namespace FanSoft.CadTurmas.Api.Controllers
     public class UsuariosController:ControllerBase
     {
         
-         private readonly IUsuarioReadRepository _usuarioReadRepository;
+        private readonly IUsuarioReadRepository _usuarioReadRepository;
         private readonly IMediator _mediator;
 
         public UsuariosController(IUsuarioReadRepository usuarioReadRepository, IMediator mediator)

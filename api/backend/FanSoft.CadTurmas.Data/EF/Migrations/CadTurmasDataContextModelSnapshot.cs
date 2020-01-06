@@ -47,8 +47,8 @@ namespace FanSoft.CadTurmas.Data.EF.Migrations
                         new
                         {
                             Id = 1,
-                            AlteradoEm = new DateTime(2020, 1, 4, 14, 31, 50, 793, DateTimeKind.Utc).AddTicks(4525),
-                            CriadoEm = new DateTime(2020, 1, 4, 14, 31, 50, 793, DateTimeKind.Utc).AddTicks(4496),
+                            AlteradoEm = new DateTime(2020, 1, 6, 14, 28, 0, 349, DateTimeKind.Utc).AddTicks(9866),
+                            CriadoEm = new DateTime(2020, 1, 6, 14, 28, 0, 349, DateTimeKind.Utc).AddTicks(9837),
                             Nome = "Fabiano Nalin"
                         });
                 });
@@ -90,11 +90,11 @@ namespace FanSoft.CadTurmas.Data.EF.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("54442804-bf96-4b64-b334-1a8ae4772326"),
-                            AlteradoEm = new DateTime(2020, 1, 4, 14, 31, 50, 795, DateTimeKind.Utc).AddTicks(7950),
-                            CriadoEm = new DateTime(2020, 1, 4, 14, 31, 50, 795, DateTimeKind.Utc).AddTicks(7937),
-                            DataInicio = new DateTime(2020, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc),
-                            DataTermino = new DateTime(2020, 1, 18, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Id = new Guid("d4228a44-1a3d-46f1-b8eb-e2cfdb7ff551"),
+                            AlteradoEm = new DateTime(2020, 1, 6, 14, 28, 0, 352, DateTimeKind.Utc).AddTicks(5786),
+                            CriadoEm = new DateTime(2020, 1, 6, 14, 28, 0, 352, DateTimeKind.Utc).AddTicks(5776),
+                            DataInicio = new DateTime(2020, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DataTermino = new DateTime(2020, 1, 20, 0, 0, 0, 0, DateTimeKind.Utc),
                             Descricao = "Turma AZ 203",
                             InstrutorId = 1,
                             Nome = "AZ 203 Dez 2019"
@@ -122,6 +122,12 @@ namespace FanSoft.CadTurmas.Data.EF.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(80)");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("char(32)");
+
+                    b.Property<DateTime?>("RefreshTokenValidate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("char(88)");
@@ -134,8 +140,8 @@ namespace FanSoft.CadTurmas.Data.EF.Migrations
                         new
                         {
                             Id = 1,
-                            AlteradoEm = new DateTime(2020, 1, 4, 14, 31, 50, 804, DateTimeKind.Utc).AddTicks(8882),
-                            CriadoEm = new DateTime(2020, 1, 4, 14, 31, 50, 804, DateTimeKind.Utc).AddTicks(8864),
+                            AlteradoEm = new DateTime(2020, 1, 6, 14, 28, 0, 362, DateTimeKind.Utc).AddTicks(6163),
+                            CriadoEm = new DateTime(2020, 1, 6, 14, 28, 0, 362, DateTimeKind.Utc).AddTicks(6138),
                             Email = "nalin@fansoft.com.br",
                             Nome = "Fabiano Nalin",
                             Senha = "a1n5uKDhhuf8oIt9RxEKX4dGV3ASZODELtipSBegRkM92SE+EaUhgxS0now1iRwko0nTDhfR3q7rV+Lz3btZMQ=="

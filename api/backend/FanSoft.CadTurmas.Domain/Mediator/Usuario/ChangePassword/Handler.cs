@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FanSoft.CadTurmas.Domain.Contracts.Infra.Data;
 using FanSoft.CadTurmas.Domain.Contracts.Repositories;
-using FanSoft.CadTurmas.Domain.Helpers;
+using FanSoft.CadTurmas.Domain.Infra.Helpers;
 using MediatR;
 
 namespace FanSoft.CadTurmas.Domain.Mediator.Usuario.ChangePassword

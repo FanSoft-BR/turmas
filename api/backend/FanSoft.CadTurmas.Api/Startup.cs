@@ -1,5 +1,5 @@
 using System.Text;
-using FanSoft.CadTurmas.Api.Infra;
+using FanSoft.CadTurmas.Domain.Infra.Models;
 using FanSoft.CadTurmas.CrossCutting.DI;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;

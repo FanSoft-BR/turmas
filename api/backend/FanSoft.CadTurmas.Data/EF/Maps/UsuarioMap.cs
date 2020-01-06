@@ -17,6 +17,10 @@ namespace FanSoft.CadTurmas.Data.EF.Maps
             builder.Property(p => p.Email).IsRequired().HasColumnType("varchar(80)");
             builder.Property(p => p.Senha).IsRequired().HasColumnType("char(88)");
 
+            builder.Property(p => p.RefreshToken).HasColumnType("char(32)"); //GUID s/ hífen
+            builder.Property(p => p.RefreshTokenValidate).HasColumnType("datetime2");
+            builder.Ignore(p => p.RefreshTokenIsValid);
+
             builder.Property(p => p.CriadoEm).HasColumnType("datetime2");
             builder.Property(p => p.AlteradoEm).HasColumnType("datetime2");
 

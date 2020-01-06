@@ -26,15 +26,29 @@ namespace FanSoft.CadTurmas.Domain.Entities
         public string Email { get; private set; }
         public string Senha { get; private set; }
 
+        public string RefreshToken { get; private set; }
+        public DateTime? RefreshTokenValidate { get; private set; }
+        public bool RefreshTokenIsValid => RefreshTokenValidate != null && DateTime.UtcNow < RefreshTokenValidate;
+
+
         public void Update(string nome, string email)
         {
             Nome = nome;
             Email = email;
+            AlteradoEm = DateTime.UtcNow;
         }
 
         public void UpdatePassword(string novaSenha)
         {
             Senha = novaSenha;
+            AlteradoEm = DateTime.UtcNow;
+        }
+
+        public void RefreshTokenGenerate(int refreshTokenExpires)
+        {
+            RefreshToken = Guid.NewGuid().ToString("N").ToUpper();
+            RefreshTokenValidate = DateTime.UtcNow.AddHours(refreshTokenExpires);
+            AlteradoEm = DateTime.UtcNow;
         }
     }
 }

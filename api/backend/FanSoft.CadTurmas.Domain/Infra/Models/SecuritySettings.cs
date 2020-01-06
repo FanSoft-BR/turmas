@@ -1,4 +1,4 @@
-namespace FanSoft.CadTurmas.Api.Infra
+namespace FanSoft.CadTurmas.Domain.Infra.Models
 {
     public class SecuritySettings
     {
@@ -10,6 +10,9 @@ namespace FanSoft.CadTurmas.Api.Infra
         
         // Tempo em horas que o Token é válido
         public int Expires { get; set; }
+
+        // Tempo em horas do RefreshToken
+        public int RefreshTokenExpires { get; set; }
         
         // Emissor Válido do Token
         public string ValidIssuer { get; set; }
