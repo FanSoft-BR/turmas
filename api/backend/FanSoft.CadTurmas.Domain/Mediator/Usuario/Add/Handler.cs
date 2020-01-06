@@ -24,7 +24,7 @@ namespace FanSoft.CadTurmas.Domain.Mediator.Usuario.Add
 
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
-            var novoUsuario = new Entities.Usuario(request.Nome, request.Email, request.Senha.Encrypt());
+            var novoUsuario = new Entities.Usuario(request.Nome, request.Email, request.Senha.Encrypt(), request.Roles);
             _usuarioWriteRepository.Add(novoUsuario);
             await _uow.CommitAsync();
 

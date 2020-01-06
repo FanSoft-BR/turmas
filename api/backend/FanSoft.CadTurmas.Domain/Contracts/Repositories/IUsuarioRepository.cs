@@ -7,6 +7,7 @@ namespace FanSoft.CadTurmas.Domain.Contracts.Repositories
     {
         Task<Usuario> GetByEmailAsync(string email);
         Task<Usuario> GetByRefreshTokenAsync(string token);
+        Task<Usuario> GetByIdWithRolesAsync(int id);
     }
 
     public interface IUsuarioWriteRepository : IWriteRepository<Usuario>

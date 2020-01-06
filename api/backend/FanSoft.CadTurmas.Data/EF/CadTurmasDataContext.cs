@@ -24,6 +24,8 @@ namespace FanSoft.CadTurmas.Data.EF
             modelBuilder.ApplyConfiguration(new Maps.InstrutorMap());
             modelBuilder.ApplyConfiguration(new Maps.TurmaMap());
             modelBuilder.ApplyConfiguration(new Maps.UsuarioMap());
+            modelBuilder.ApplyConfiguration(new Maps.RoleMap());
+            modelBuilder.ApplyConfiguration(new Maps.UsuarioRoleMap());
 
             modelBuilder.Entity<Instrutor>().HasData(
                 new Instrutor(1, "Fabiano Nalin")
@@ -36,11 +38,23 @@ namespace FanSoft.CadTurmas.Data.EF
             );
 
             modelBuilder.Entity<Usuario>().HasData(
-                new Usuario(1, "Fabiano Nalin","nalin@fansoft.com.br", "123456".Encrypt())
+                new Usuario(1, "Fabiano Nalin","nalin@fansoft.com.br", "123456".Encrypt()),
+                new Usuario(2, "Priscila Mitui","pmitui@gmail.com", "654321".Encrypt())
+            );
+
+            modelBuilder.Entity<Role>().HasData(
+                new Role(1, "Admin", "Administrador de tudo"),
+                new Role(2, "PowerUser", "Perfil de Usuário c/ privilégios administrativos"),
+                new Role(3, "User", "Perfil de Usuário comum")
+            );
+
+            modelBuilder.Entity<UsuarioRole>().HasData(
+                new UsuarioRole(1,1),
+                new UsuarioRole(1,2),
+                new UsuarioRole(2,3)
             );
 
         }
-
 
     }
 }

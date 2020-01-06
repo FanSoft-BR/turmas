@@ -11,43 +11,45 @@ namespace FanSoft.CadTurmas.Api.Controllers
     [Authorize]
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
-    public class InstrutoresController : ControllerBase
+    public class RolesController : ControllerBase
     {
-        private readonly IInstrutorReadRepository _instrutorReadRepository;
+
+
+        private readonly IRoleReadRepository _roleReadRepository;
         private readonly IMediator _mediator;
 
-        public InstrutoresController(IInstrutorReadRepository instrutorReadRepository, IMediator mediator)
+        public RolesController(IRoleReadRepository roleReadRepository, IMediator mediator)
         {
-            _instrutorReadRepository = instrutorReadRepository;
+            _roleReadRepository = roleReadRepository;
             _mediator = mediator;
         }
 
         /// <summary>
-        /// Lista todos os instrutores.
+        /// Lista todos as role.
         /// </summary>
-        /// <returns>Uma lista de instrutores</returns>
-        /// <response code="200">Instrutores retornardos com sucesso</response>
+        /// <returns>Uma lista de roles</returns>
+        /// <response code="200">Roles retornardas com sucesso</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var data = await _instrutorReadRepository.GetAsync();
+            var data = await _roleReadRepository.GetAsync();
             return Ok(data);
         }
 
         /// <summary>
-        /// Busca um instrutor pelo ID.
+        /// Busca uma role pelo ID.
         /// </summary>
-        /// <param name="id">Id do Instrutor</param> 
-        /// <returns>Um instrutor</returns>
-        /// <response code="200">Instrutor retornardo com sucesso</response>
-        /// <response code="404">Caso o instrutor não exista ou o id não seja um inteiro</response>
+        /// <param name="id">Id da Role</param> 
+        /// <returns>Uma Role</returns>
+        /// <response code="200">Role retornarda com sucesso</response>
+        /// <response code="404">Caso a role não exista ou o id não seja um inteiro</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("{id:int}", Name = "GetInstrutorById")]
+        [HttpGet("{id:int}", Name = "GetRoleById")]
         public async Task<IActionResult> GetById(int id)
         {
-            var data = await _instrutorReadRepository.GetAsync(id);
+            var data = await _roleReadRepository.GetAsync(id);
 
             if (data == null)
                 return NotFound();
@@ -56,26 +58,26 @@ namespace FanSoft.CadTurmas.Api.Controllers
         }
 
         /// <summary>
-        /// Adiciona um novo instrutor.
+        /// Adiciona uma nova role.
         /// </summary>
         /// <remarks>
         /// Exemplo de requisição:
         ///
-        ///     POST /Instrutores
+        ///     POST /Roles
         ///     {
-        ///        "nome": "Instrutor XPTO",
-        ///        "descricao": "Descrição do instrutor XPTO"
+        ///        "nome": "Role XPTO",
+        ///        "descricao": "Descrição da role XPTO"
         ///     }
-        ///
         /// </remarks>
         /// <param name="request"></param>
-        /// <returns>Um novo instrutor</returns>
-        /// <response code="201">Returna o novo instrutor</response>
+        /// <returns>Uma nova role</returns>
+        /// <response code="201">Retorna a nova role</response>
         /// <response code="400">Caso o nome seja nulo</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles="Usuario")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Domain.Mediator.Instrutor.Add.Request request)
+        public async Task<IActionResult> Post([FromBody]Domain.Mediator.Role.Add.Request request)
         {
             var response = await _mediator.Send(request).ConfigureAwait(false);
 
@@ -84,20 +86,21 @@ namespace FanSoft.CadTurmas.Api.Controllers
                 return BadRequest(response.Errors);
             }
 
-            return CreatedAtRoute("GetInstrutorById", new { id = response.Result.Id }, response.Result);
+            return CreatedAtRoute("GetRoleById", new { id = response.Result.Id }, response.Result);
         }
 
+
         /// <summary>
-        /// Edita um instrutor.
+        /// Edita uma role.
         /// </summary>
-        /// <param name="id">Id do Instrutor</param> 
+        /// <param name="id">Id da Role</param> 
         /// <remarks>
         /// Exemplo de requisição:
         ///
-        ///     PUT /Instrutores/{id}
+        ///     PUT /Roles/{id}
         ///     {
-        ///        "nome": "Instrutor XPTO",
-        ///        "descricao": "Descrição do instrutor XPTO"
+        ///        "nome": "Role XPTO",
+        ///        "descricao": "Descrição da role XPTO"
         ///     }
         ///
         /// </remarks>
@@ -107,7 +110,7 @@ namespace FanSoft.CadTurmas.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Put(int id, [FromBody]Domain.Mediator.Instrutor.Edit.Request request)
+        public async Task<IActionResult> Put(int id, [FromBody]Domain.Mediator.Role.Edit.Request request)
         {
             request.Id = id;
 
@@ -122,17 +125,17 @@ namespace FanSoft.CadTurmas.Api.Controllers
         }
 
         /// <summary>
-        /// Exclui um instrutor pelo ID.
+        /// Exclui uma role pelo ID.
         /// </summary>
-        /// <param name="id">Id do instrutor</param> 
-        /// <response code="204">Instrutor excluído c/ sucesso</response>
-        /// <response code="400">Caso o instrutor não exista ou o id não seja um inteiro</response>
+        /// <param name="id">Id da role</param> 
+        /// <response code="204">Role excluída c/ sucesso</response>
+        /// <response code="400">Caso a role não exista ou o id não seja um inteiro</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var request = new Domain.Mediator.Instrutor.Del.Request();
+            var request = new Domain.Mediator.Role.Del.Request();
             request.Id = id;
 
             var response = await _mediator.Send(request).ConfigureAwait(false);
@@ -144,5 +147,6 @@ namespace FanSoft.CadTurmas.Api.Controllers
 
             return NoContent();
         }
+
     }
 }

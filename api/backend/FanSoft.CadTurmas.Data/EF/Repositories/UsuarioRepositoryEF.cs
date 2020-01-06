@@ -10,12 +10,26 @@ namespace FanSoft.CadTurmas.Data.EF.Repositories
         public UsuarioReadRepositoryEF(CadTurmasDataContext ctx) : base(ctx) { }
         public async Task<Usuario> GetByEmailAsync(string email)
         {
-            return await _db.FirstOrDefaultAsync(x=>x.Email == email);
+            return await
+                            _db
+                                .Include(u => u.UsuarioRoles).ThenInclude(r => r.Role)
+                                .FirstOrDefaultAsync(x => x.Email == email);
+        }
+
+        public async Task<Usuario> GetByIdWithRolesAsync(int id)
+        {
+            return await
+                        _db
+                            .Include(u => u.UsuarioRoles)
+                            .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Usuario> GetByRefreshTokenAsync(string token)
         {
-            return await _db.FirstOrDefaultAsync(x=>x.RefreshToken == token);
+            return await
+                        _db
+                            .Include(u => u.UsuarioRoles).ThenInclude(r => r.Role)
+                            .FirstOrDefaultAsync(x => x.RefreshToken == token);
         }
     }
 

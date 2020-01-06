@@ -29,7 +29,7 @@ namespace FanSoft.CadTurmas.Domain.Mediator.Usuario.Edit
 
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
-            var usuario = await _usuarioReadRepository.GetAsync(request.Id);
+            var usuario = await _usuarioReadRepository.GetByIdWithRolesAsync(request.Id);
 
             if (usuario == null)
             {
@@ -38,7 +38,7 @@ namespace FanSoft.CadTurmas.Domain.Mediator.Usuario.Edit
                 return response;
             }
 
-            usuario.Update(request.Nome, request.Email);
+            usuario.Update(request.Nome, request.Email, request.Roles);
             _usuarioWriteRepository.Update(usuario);
             await _uow.CommitAsync();
 

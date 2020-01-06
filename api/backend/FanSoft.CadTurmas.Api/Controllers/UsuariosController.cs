@@ -67,7 +67,8 @@ namespace FanSoft.CadTurmas.Api.Controllers
         ///     {
         ///         "nome": "Novo Usuario",
         ///         "email": "usuario@usuario.com.br",
-        ///         "senha": "senha"
+        ///         "senha": "senha",
+        ///         "roles": [2,3]
         ///     }
         ///
         /// </remarks>
@@ -101,6 +102,7 @@ namespace FanSoft.CadTurmas.Api.Controllers
         ///     {
         ///        "nome": "Usuário XPTO",
         ///        "email": "usuario@user.com.br"
+        ///        "roles": [2,3]
         ///     }
         ///
         /// </remarks>

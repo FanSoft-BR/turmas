@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MediatR;
 
 namespace FanSoft.CadTurmas.Domain.Mediator.Usuario.Edit
@@ -8,5 +9,6 @@ namespace FanSoft.CadTurmas.Domain.Mediator.Usuario.Edit
         public string Nome { get; set; }
         public string Email { get; set; }
         
+        public IEnumerable<int> Roles { get; set; }
     }
 }

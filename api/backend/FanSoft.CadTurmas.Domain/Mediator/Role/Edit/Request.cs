@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace FanSoft.CadTurmas.Domain.Mediator.Instrutor.Edit
+namespace FanSoft.CadTurmas.Domain.Mediator.Role.Edit
 {
     public class Request : IRequest<Response>
     {

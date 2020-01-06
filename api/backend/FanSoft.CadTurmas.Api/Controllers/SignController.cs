@@ -76,10 +76,14 @@ namespace FanSoft.CadTurmas.Api.Controllers
 
             var claims = new List<Claim>() {
                 new Claim("id", usuario.Id.ToString()),
+                // new Claim(ClaimTypes.Name, usuario.Nome),
                 new Claim("nome", usuario.Nome),
+                // new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
                 new Claim("email", usuario.Email),
-                //new Claim("perfis", string.Join(',', perfis.Select(p =>new {p.PerfilId, p.Perfil.Nome })))
+                // new Claim(ClaimTypes.Role, string.Join(',', usuario.UsuarioRoles.SelectMany(x=> new string[] {x.Role.Nome})))
             };
+
+            usuario.UsuarioRoles.ToList().ForEach(u=> claims.Add(new Claim("role", u.Role.Nome)));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_securitySettings.SigningKey));
             var siginCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -87,7 +91,7 @@ namespace FanSoft.CadTurmas.Api.Controllers
                     issuer: "fansoft.com.br",
                     audience: "http://localhost",
                     claims: claims,
-                    expires: DateTime.UtcNow.AddMinutes(5),
+                    expires: DateTime.UtcNow.AddHours(_securitySettings.Expires),
                     notBefore: DateTime.UtcNow,
                     signingCredentials: siginCredentials
                 );

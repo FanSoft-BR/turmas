@@ -40,6 +40,9 @@ namespace FanSoft.CadTurmas.CrossCutting.DI
 
             services.AddTransient<Domain.Contracts.Repositories.IUsuarioReadRepository, Data.EF.Repositories.UsuarioReadRepositoryEF>();
             services.AddTransient<Domain.Contracts.Repositories.IUsuarioWriteRepository, Data.EF.Repositories.UsuarioWriteRepositoryEF>();
+
+            services.AddTransient<Domain.Contracts.Repositories.IRoleReadRepository, Data.EF.Repositories.RoleReadRepositoryEF>();
+            services.AddTransient<Domain.Contracts.Repositories.IRoleWriteRepository, Data.EF.Repositories.RoleWriteRepositoryEF>();
         }
 
         private static void registerAppServices(IServiceCollection services)
